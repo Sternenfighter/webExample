@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets" xmlns:p="primefaces">
+<h:head>
+    <title>Login</title>
+    <h:outputStylesheet library="css" name="login.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <header>
+        <div class="ui-grid-row">
+            <div class="ui-grid-col-12">
+                <br/>
+            </div>
+        </div>
+    </header>
+    <div class="ui-grid-row">
+        <div class="ui-grid-col-12 ui-card">
+            <h:form id="login">
+                <h2>Login</h2>
+                <p:panelGrid columns="2" layout="flex" styleClass="ui-fluid center ui-noborder ui-shadow">
+                    <p:outputLabel id="error" value="Login failed!" styleClass="red" rendered="${!empty param['error']}"/>
+                    <p:inputText id="username" placeholder="Username"/>
+                    <p:password id="password" placeholder="Password"/>
+                    <p:commandButton id="submit" value="Login" ajax="false" styleClass="rounded-button"/>
+                </p:panelGrid>
+            </h:form>
+        </div>
+    </div>
+</h:body>
+</html>

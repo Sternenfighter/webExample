@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets" xmlns:p="primefaces">
+<h:head>
+    <title>Home</title>
+    <h:outputStylesheet library="css" name="main.css"/>
+    <link rel="shortcut icon" type="image/x-icon" href="#{resource['images/favicon.ico']}"/>
+</h:head>
+<h:body>
+    <h1>Welcome to Home Page</h1>
+    <div class="ui-grid-row">
+        <div class="col-12">
+            <ui:insert name="navbar">
+                <ui:include src="#{request.contextPath}/templates/navbar.xhtml"/>
+            </ui:insert>
+        </div>
+    </div>
+    <div class="ui-grid-row">
+        <p:card class="col-12-99 lg:col-6 xl:col-4" rendered="#{request.isUserInRole('ADMIN')}">
+            <f:facet name="header">
+                <p:link outcome="admin/home">
+                    <p:graphicImage name="slothAdmin.jpg" library="images" class="img"/>
+                </p:link>
+            </f:facet>
+            <f:facet name="title">
+                <p:link outcome="admin/home">
+                    Admin Area
+                </p:link>
+            </f:facet>
+        </p:card>
+        <p:card class="col-12-99 lg:col-6 xl:col-4" rendered="#{request.isUserInRole('USER')}">
+            <f:facet name="header">
+                <p:link outcome="user/home">
+                    <p:graphicImage name="slothFood.jpg" library="images" class="img"/>
+                </p:link>
+            </f:facet>
+            <f:facet name="title">
+                <p:link outcome="user/home">
+                    User Area
+                </p:link>
+            </f:facet>
+        </p:card>
+    </div>
+</h:body>
+</html>

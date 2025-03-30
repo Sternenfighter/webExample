@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html xmlns:h="jakarta.faces.html" xmlns:f="jakarta.faces.core" xmlns:ui="jakarta.faces.facelets" xmlns:p="primefaces">
+<div class="card">
+    <p:menubar hideDelay="1000">
+        <f:facet name="start">
+            <p:graphicImage name="#{request.contextPath}/images/navbar.png" width="150"/>
+        </f:facet>
+        <p:menuitem value="Home" icon="pi pi-fw pi-home" outcome="#{request.contextPath}/home"/>
+        <p:divider rendered="#{request.isUserInRole('ADMIN') or request.isUserInRole('USER')}" layout="vertical"/>
+        <p:submenu rendered="#{request.isUserInRole('ADMIN')}" label="Admin Area" icon="pi pi-fw pi-verified">
+            <p:menuitem value="Admin Home" icon="pi pi-fw pi-home" outcome="#{request.contextPath}/admin/home"/>
+            <p:divider/>
+            <p:menuitem value="User" icon="pi pi-fw pi-users" disabled="true"/>
+            <p:menuitem value="Duplicate" icon="pi pi-fw pi-copy" disabled="true"/>
+        </p:submenu>
+        <p:submenu rendered="#{request.isUserInRole('USER')}" label="User Area" icon="pi pi-fw pi-user">
+            <p:menuitem value="Admin Home" icon="pi pi-fw pi-home" outcome="#{request.contextPath}/user/home"/>
+            <p:divider/>
+            <p:menuitem value="User" icon="pi pi-fw pi-users" disabled="true"/>
+            <p:menuitem value="Duplicate" icon="pi pi-fw pi-copy" disabled="true"/>
+        </p:submenu>
+        <p:divider layout="vertical"/>
+        <p:menuitem icon="pi pi-fw pi-cog" disabled="true"/>
+        <f:facet name="end">
+            <h:form onsubmit="action='#{request.contextPath}/logout';" class="logout-form">
+                <p:commandButton value="Logout" icon="pi pi-fw pi-sign-out" styleClass="ui-button-info" ajax="false"/>
+            </h:form>
+        </f:facet>
+    </p:menubar>
+</div>
+</html>

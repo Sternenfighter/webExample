@@ -1,0 +1,12 @@
+h2 {
+    color: blueviolet;
+    text-align: center;
+}
+
+.ui-card {
+    background-image: linear-gradient(to right, red, orange, yellow) !important;
+}
+
+.red{
+    color: darkred;
+}

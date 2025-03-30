@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+                   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog
+                   https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+    <changeSet id="0" author="sternenfighter">
+        <createTable tableName="appuser">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="username" type="varchar">
+                <constraints nullable="false" unique="true"/>
+            </column>
+            <column name="password" type="varchar"/>
+            <column name="enabled" type="boolean"/>
+        </createTable>
+        <createTable tableName="role">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="name" type="varchar"/>
+        </createTable>
+        <createTable tableName="userrole">
+            <column name="id" type="int" autoIncrement="true">
+                <constraints nullable="false" unique="true" primaryKey="true"/>
+            </column>
+            <column name="user" type="int"/>
+            <column name="role" type="int"/>
+        </createTable>
+    </changeSet>
+    <!-- Create User with Role ADMIN -->
+    <changeSet id="1" author="sternenfighter">
+        <insert tableName="appuser">
+            <column name="username">admin</column>
+            <!-- Bcrypt: 123 -->
+            <column name="password">$2a$12$KYoRvAVJ3lJINjDPoKvHZux7Y1cG19mTK6p1pAqN/JOsoxLEsOZva</column>
+            <column name="enabled">true</column>
+        </insert>
+        <insert tableName="role">
+            <column name="name">ADMIN</column>
+        </insert>
+        <insert tableName="userrole">
+            <column name="user">1</column>
+            <column name="role">1</column>
+        </insert>
+    </changeSet>
+    <!-- Create User with Role USER -->
+    <changeSet id="2" author="sternenfighter">
+        <insert tableName="appuser">
+            <column name="username">user</column>
+            <column name="password">$2a$12$KYoRvAVJ3lJINjDPoKvHZux7Y1cG19mTK6p1pAqN/JOsoxLEsOZva</column>
+            <column name="enabled">true</column>
+        </insert>
+        <insert tableName="role">
+            <column name="name">USER</column>
+        </insert>
+        <insert tableName="userrole">
+            <column name="user">2</column>
+            <column name="role">2</column>
+        </insert>
+    </changeSet>
+</databaseChangeLog>
